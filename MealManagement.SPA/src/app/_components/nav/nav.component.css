@@ -1,0 +1,9 @@
+.btn-outline-light:hover {
+  color: #fff;
+  background-color: #23272b;
+  border-color: #f8f9fa;
+}
+
+.app-nav-margin {
+  margin-top: 76px;
+}
