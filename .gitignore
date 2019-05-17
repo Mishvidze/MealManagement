@@ -460,3 +460,4 @@ testem.log
 .DS_Store
 Thumbs.db
 
+/MealManagement.SPA/dist/MealManagement
