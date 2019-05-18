@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgElement, WithProperties } from '@angular/elements';
 import { SignInComponent } from '../SignIn/SignIn.component';
 import { SignUpComponent } from '../SignUp/SignUp.component';
+import { SignService } from '../Sign.service';
 
 @Component({
   selector: 'app-SignInOrSignUp',
@@ -10,27 +11,18 @@ import { SignUpComponent } from '../SignUp/SignUp.component';
 })
 export class SignInOrSignUpComponent implements OnInit {
 
-  constructor() { }
+  constructor(public signService: SignService) { }
 
   ngOnInit() {
   }
 
   ShowSignIn() {
     debugger
-    // Create element
-    const popupEl: NgElement & WithProperties<SignInComponent> = document.createElement('signin-element') as any;
-
-    // Add to the DOM
-    document.body.appendChild(popupEl);
+    this.signService.showSignIn();
   }
 
   ShowSignUp() {
-    debugger
-    // Create element
-    const popupEl: NgElement & WithProperties<SignUpComponent> = document.createElement('signup-element') as any;
-
-    // Add to the DOM
-    document.body.appendChild(popupEl);
+    this.signService.showSignUp();
   }
 
 }
