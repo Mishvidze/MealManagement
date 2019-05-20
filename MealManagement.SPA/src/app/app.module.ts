@@ -11,7 +11,7 @@ import { SignInComponent } from './_components/SignInOnSignUp/SignIn/SignIn.comp
 import { SignUpComponent } from './_components/SignInOnSignUp/SignUp/SignUp.component';
 import { SignInOrSignUpComponent } from './_components/SignInOnSignUp/SignInOrSignUp/SignInOrSignUp.component';
 import { createCustomElement } from '@angular/elements';
-import { SignService } from './_components/SignInOnSignUp/Sign.service';
+import { SignDirective } from './_components/SignInOnSignUp/Sign.directive';
 
 @NgModule({
   declarations: [
@@ -20,14 +20,15 @@ import { SignService } from './_components/SignInOnSignUp/Sign.service';
     HomeComponent,
     SignInOrSignUpComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    SignDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule
   ],
-  providers: [SignService],
+  providers: [],
   bootstrap: [AppComponent],
   entryComponents:[
     SignInComponent,

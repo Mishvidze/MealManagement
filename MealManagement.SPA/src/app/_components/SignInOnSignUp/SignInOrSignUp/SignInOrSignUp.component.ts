@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { NgElement, WithProperties } from '@angular/elements';
+import { Component, OnInit, Type, ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { SignInComponent } from '../SignIn/SignIn.component';
 import { SignUpComponent } from '../SignUp/SignUp.component';
-import { SignService } from '../Sign.service';
+import { SignDirective } from '../Sign.directive';
 
 @Component({
   selector: 'app-SignInOrSignUp',
@@ -11,18 +10,37 @@ import { SignService } from '../Sign.service';
 })
 export class SignInOrSignUpComponent implements OnInit {
 
-  constructor(public signService: SignService) { }
+  signInComponent: Type<any>;
+  signUpComponent: Type<any>;
+
+  @ViewChild(SignDirective) signHost: SignDirective;
+
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
+    this.InitComponents();
+  }
+
+  InitComponents(){
+    this.signInComponent = SignInComponent;
+    this.signUpComponent = SignUpComponent;
   }
 
   ShowSignIn() {
-    debugger
-    this.signService.showSignIn();
+    this.loadComponent(this.signInComponent);
   }
 
   ShowSignUp() {
-    this.signService.showSignUp();
+    this.loadComponent(this.signUpComponent);
   }
 
+  loadComponent(component: Type<any>) {
+
+    let componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
+
+    let viewContainerRef = this.signHost.viewContainerRef;
+    viewContainerRef.clear();
+
+    viewContainerRef.createComponent(componentFactory);
+  }
 }
