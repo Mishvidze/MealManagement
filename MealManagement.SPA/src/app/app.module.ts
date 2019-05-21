@@ -12,6 +12,7 @@ import { SignUpComponent } from './_components/SignInOnSignUp/SignUp/SignUp.comp
 import { SignInOrSignUpComponent } from './_components/SignInOnSignUp/SignInOrSignUp/SignInOrSignUp.component';
 import { createCustomElement } from '@angular/elements';
 import { SignDirective } from './_components/SignInOnSignUp/Sign.directive';
+import { CommonService } from './_services/common.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { SignDirective } from './_components/SignInOnSignUp/Sign.directive';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [CommonService],
   bootstrap: [AppComponent],
   entryComponents:[
     SignInComponent,

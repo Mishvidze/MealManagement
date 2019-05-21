@@ -2,6 +2,8 @@ import { Component, OnInit, Type, ComponentFactoryResolver, ViewChild } from '@a
 import { SignInComponent } from '../SignIn/SignIn.component';
 import { SignUpComponent } from '../SignUp/SignUp.component';
 import { SignDirective } from '../Sign.directive';
+import { CommonService } from 'src/app/_services/common.service';
+import { pathes } from 'src/app/_constants/pathes';
 
 @Component({
   selector: 'app-SignInOrSignUp',
@@ -15,7 +17,8 @@ export class SignInOrSignUpComponent implements OnInit {
 
   @ViewChild(SignDirective) signHost: SignDirective;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver,
+              private common: CommonService) { }
 
   ngOnInit() {
     this.InitComponents();
@@ -28,10 +31,14 @@ export class SignInOrSignUpComponent implements OnInit {
 
   ShowSignIn() {
     this.loadComponent(this.signInComponent);
+
+    this.common.rewriteUrl(pathes.signIn);
   }
 
   ShowSignUp() {
     this.loadComponent(this.signUpComponent);
+
+    this.common.rewriteUrl(pathes.signUp);
   }
 
   loadComponent(component: Type<any>) {
@@ -43,4 +50,5 @@ export class SignInOrSignUpComponent implements OnInit {
 
     viewContainerRef.createComponent(componentFactory);
   }
+ 
 }
