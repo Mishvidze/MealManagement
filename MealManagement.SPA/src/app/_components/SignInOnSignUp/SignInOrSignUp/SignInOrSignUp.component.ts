@@ -51,13 +51,13 @@ export class SignInOrSignUpComponent implements OnInit {
   ShowSignIn() {
     this.loadComponent(this.signInComponent);
 
-    this.common.rewriteUrl(pathes.signIn);
+    // this.common.rewriteUrl(pathes.signIn);
   }
 
   ShowSignUp() {
     this.loadComponent(this.signUpComponent);
 
-    this.common.rewriteUrl(pathes.signUp);
+    // this.common.rewriteUrl(pathes.signUp);
   }
 
   loadComponent(component: Type<any>) {
