@@ -32,7 +32,10 @@ export class SignInOrSignUpComponent implements OnInit {
   ngOnInit() {
     this.InitComponents();
     var formName = this.route.snapshot.data["form"];
-    debugger
+    this.ChangeForm(formName);
+  }
+
+  ChangeForm(formName: string) {
     if (formName == "signIn") {
       this.ShowSignIn();
     } else if (formName == "signUp") {
@@ -65,6 +68,13 @@ export class SignInOrSignUpComponent implements OnInit {
     let viewContainerRef = this.signHost.viewContainerRef;
     viewContainerRef.clear();
 
-    viewContainerRef.createComponent(componentFactory);
+    let newCompRef = viewContainerRef.createComponent(componentFactory);
+
+    newCompRef.instance.SignChange.subscribe((form: string) => {
+      console.log(form);
+      console.log('cuc');
+      
+      this.ChangeForm(form);
+    });
   }
 }
