@@ -5,8 +5,16 @@ import { SignInOrSignUpComponent } from "./_components/SignInOnSignUp/SignInOrSi
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
-  { path: "signIn", component: SignInOrSignUpComponent },
-  { path: "signUp", component: SignInOrSignUpComponent }
+  {
+    path: "signIn",
+    component: SignInOrSignUpComponent,
+    data: { form: "signIn" }
+  },
+  {
+    path: "signUp",
+    component: SignInOrSignUpComponent,
+    data: { form: "signUp" }
+  }
 ];
 
 @NgModule({
