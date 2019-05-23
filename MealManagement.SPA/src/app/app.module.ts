@@ -13,6 +13,7 @@ import { SignInOrSignUpComponent } from './_components/SignInOnSignUp/SignInOrSi
 import { createCustomElement } from '@angular/elements';
 import { SignDirective } from './_components/SignInOnSignUp/Sign.directive';
 import { CommonService } from './_services/common.service';
+import { AlertifyService } from './_services/alertify.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,10 @@ import { CommonService } from './_services/common.service';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [CommonService],
+  providers: [
+    CommonService, 
+    AlertifyService
+  ],
   bootstrap: [AppComponent],
   entryComponents:[
     SignInComponent,
@@ -37,12 +41,12 @@ import { CommonService } from './_services/common.service';
   ],
 })
 export class AppModule {
-  constructor(injector: Injector) {
-    // Convert `PopupComponent` to a custom element.
-    const SignInComp = createCustomElement(SignInComponent, {injector});
-    const SignUpComp = createCustomElement(SignUpComponent, {injector});
-    // Register the custom element with the browser.
-    customElements.define('signin-element', SignInComp);
-    customElements.define('signup-element', SignUpComp);
-  }
+  // constructor(injector: Injector) {
+  //   // Convert `PopupComponent` to a custom element.
+  //   const SignInComp = createCustomElement(SignInComponent, {injector});
+  //   const SignUpComp = createCustomElement(SignUpComponent, {injector});
+  //   // Register the custom element with the browser.
+  //   customElements.define('signin-element', SignInComp);
+  //   customElements.define('signup-element', SignUpComp);
+  // }
  }

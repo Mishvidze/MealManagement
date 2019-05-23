@@ -71,9 +71,6 @@ export class SignInOrSignUpComponent implements OnInit {
     let newCompRef = viewContainerRef.createComponent(componentFactory);
 
     newCompRef.instance.SignChange.subscribe((form: string) => {
-      console.log(form);
-      console.log('cuc');
-      
       this.ChangeForm(form);
     });
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { AlertifyService } from 'src/app/_services/alertify.service';
 
 @Component({
   selector: 'app-SignUp',
@@ -10,7 +11,7 @@ export class SignUpComponent{
   @Output()
   SignChange = new EventEmitter();
 
-  constructor() { }
+  constructor(private alertify: AlertifyService) { }
 
   ngOnInit() {
     
