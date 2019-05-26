@@ -8,6 +8,7 @@ namespace MealManagement.Data.Models
     public class User : IdentityUser<int>
     {
         public string Cucka { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         public ICollection<UserRole> UserRoles { get; set; }
     }

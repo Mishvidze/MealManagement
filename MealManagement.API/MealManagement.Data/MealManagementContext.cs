@@ -30,9 +30,9 @@ namespace MealManagement.Data
             {
                 userRole.HasKey(a => new { a.UserId, a.RoleId });
 
-                userRole.HasOne(a => a.Role)
-                    .WithMany(a => a.UserRoles)
-                    .HasForeignKey(a => a.RoleId)
+                userRole.HasOne(ur => ur.Role)
+                    .WithMany(r => r.UserRoles)
+                    .HasForeignKey(ur => ur.RoleId)
                     .IsRequired();
 
                 userRole.HasOne(ur => ur.User)

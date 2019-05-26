@@ -32,22 +32,7 @@ namespace MealManagement
         {
             SetUpLoggerConfig();
 
-            services.AddDbContext<MealManagementContext>(x => x.UseSqlServer(_config.GetConnectionString("MealManagement")));
-
-            IdentityBuilder identityBuilder = services.AddIdentityCore<User>(options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 4;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-            });
-
-            identityBuilder = new IdentityBuilder(identityBuilder.UserType, typeof(Role), identityBuilder.Services);
-
-            identityBuilder.AddRoleValidator<RoleValidator<Role>>();
-            identityBuilder.AddRoleManager<RoleManager<Role>>();
-            identityBuilder.AddSignInManager<SignInManager<User>>();
-
+            SetUpAuthentication(services);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -73,6 +58,25 @@ namespace MealManagement
         {
             var defaultConnection = _config.GetConnectionString("MealManagement");
             NLog.GlobalDiagnosticsContext.Set("defaultConnection", defaultConnection);
+        }
+
+        private void SetUpAuthentication(IServiceCollection services)
+        {
+            services.AddDbContext<MealManagementContext>(x => x.UseSqlServer(_config.GetConnectionString("MealManagement")));
+
+            IdentityBuilder identityBuilder = services.AddIdentityCore<User>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 4;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            });
+
+            identityBuilder = new IdentityBuilder(identityBuilder.UserType, typeof(Role), identityBuilder.Services);
+
+            identityBuilder.AddRoleValidator<RoleValidator<Role>>();
+            identityBuilder.AddRoleManager<RoleManager<Role>>();
+            identityBuilder.AddSignInManager<SignInManager<User>>();
         }
     }
 }
