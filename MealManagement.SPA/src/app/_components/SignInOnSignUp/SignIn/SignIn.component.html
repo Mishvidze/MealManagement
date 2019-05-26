@@ -1,4 +1,6 @@
-<h1>Sign in to Meal Metrics</h1>
+<h2 class="text-center text-primary">Sign in</h2>
+<hr>
+
 <form>
   <div class="form-group">
     <label for="username">Username:</label>
@@ -15,5 +17,10 @@
       <label><input type="checkbox"> Remember me</label>
       <small class="form-text text-muted">new to our system? <a [routerLink]="['/signUp']">Sign Up.</a></small>
   </div>
-  <button type="submit" class="btn btn-dark" (click)="SignIn()">Sign In</button>
+  
+
+  <div class="form-group text-center">
+    <button type="submit" class="btn btn-success" (click)="SignIn()">Login</button>
+  </div>
+
 </form>

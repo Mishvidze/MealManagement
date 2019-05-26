@@ -5,15 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './_components/nav/nav.component';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule,  ReactiveFormsModule  } from '@angular/forms';
 import { HomeComponent } from './_components/home/home.component';
 import { SignInComponent } from './_components/SignInOnSignUp/SignIn/SignIn.component';
 import { SignUpComponent } from './_components/SignInOnSignUp/SignUp/SignUp.component';
 import { SignInOrSignUpComponent } from './_components/SignInOnSignUp/SignInOrSignUp/SignInOrSignUp.component';
-import { createCustomElement } from '@angular/elements';
 import { SignDirective } from './_components/SignInOnSignUp/Sign.directive';
 import { CommonService } from './_services/common.service';
 import { AlertifyService } from './_services/alertify.service';
+import {
+  BsDatepickerModule,
+} from "ngx-bootstrap";
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { AlertifyService } from './_services/alertify.service';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [
     CommonService, 
@@ -40,13 +44,4 @@ import { AlertifyService } from './_services/alertify.service';
     SignUpComponent
   ],
 })
-export class AppModule {
-  // constructor(injector: Injector) {
-  //   // Convert `PopupComponent` to a custom element.
-  //   const SignInComp = createCustomElement(SignInComponent, {injector});
-  //   const SignUpComp = createCustomElement(SignUpComponent, {injector});
-  //   // Register the custom element with the browser.
-  //   customElements.define('signin-element', SignInComp);
-  //   customElements.define('signup-element', SignUpComp);
-  // }
- }
+export class AppModule { }
