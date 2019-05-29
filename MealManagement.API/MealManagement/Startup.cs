@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using MealManagement.Common;
 using MealManagement.Data;
 using MealManagement.Data.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -15,6 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace MealManagement
 {
@@ -32,7 +36,11 @@ namespace MealManagement
         {
             SetUpLoggerConfig();
 
+            services.AddDbContext<MealManagementContext>(x => x.UseSqlServer(_config.GetConnectionString("MealManagement")));
+
             SetUpAuthentication(services);
+
+            services.AddAutoMapper(typeof(Startup).Assembly);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -50,7 +58,7 @@ namespace MealManagement
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseMvc();
         }
 
@@ -62,7 +70,8 @@ namespace MealManagement
 
         private void SetUpAuthentication(IServiceCollection services)
         {
-            services.AddDbContext<MealManagementContext>(x => x.UseSqlServer(_config.GetConnectionString("MealManagement")));
+            var key = Encoding.ASCII.GetBytes(_config.GetSection("AppSettings:Token").Value);
+            
 
             IdentityBuilder identityBuilder = services.AddIdentityCore<User>(options =>
             {
@@ -72,11 +81,23 @@ namespace MealManagement
                 options.Password.RequireUppercase = false;
             });
 
-            identityBuilder = new IdentityBuilder(identityBuilder.UserType, typeof(Role), identityBuilder.Services);
+            identityBuilder = new IdentityBuilder(typeof(User), typeof(Role), identityBuilder.Services);
 
             identityBuilder.AddRoleValidator<RoleValidator<Role>>();
             identityBuilder.AddRoleManager<RoleManager<Role>>();
             identityBuilder.AddSignInManager<SignInManager<User>>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
         }
     }
 }
