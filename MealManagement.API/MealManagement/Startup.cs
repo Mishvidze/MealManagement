@@ -40,7 +40,7 @@ namespace MealManagement
 
             SetUpAuthentication(services);
 
-            services.AddAutoMapper(typeof(Startup).Assembly);
+            services.AddAutoMapper();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
