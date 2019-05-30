@@ -58,6 +58,7 @@ namespace MealManagement
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             //app.UseHttpsRedirection();
             app.UseMvc();
         }
@@ -82,6 +83,8 @@ namespace MealManagement
             });
 
             identityBuilder = new IdentityBuilder(typeof(User), typeof(Role), identityBuilder.Services);
+
+            identityBuilder.AddEntityFrameworkStores<MealManagementContext>();
 
             identityBuilder.AddRoleValidator<RoleValidator<Role>>();
             identityBuilder.AddRoleManager<RoleManager<Role>>();
