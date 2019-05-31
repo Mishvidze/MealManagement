@@ -16,6 +16,13 @@ import { AlertifyService } from './_services/alertify.service';
 import {
   BsDatepickerModule,
 } from "ngx-bootstrap";
+import { AuthService } from './_services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -29,14 +36,23 @@ import {
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:5000'],
+        blacklistedRoutes: ['localhost:5000/api/auth']
+      }
+    })
   ],
   providers: [
     CommonService, 
-    AlertifyService
+    AlertifyService,
+    AuthService
   ],
   bootstrap: [AppComponent],
   entryComponents:[

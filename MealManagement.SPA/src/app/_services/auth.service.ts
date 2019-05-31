@@ -8,8 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({
   providedIn: "root"
 })
-export class AuthService {
-  
+export class AuthService {  
   baseUrl = environment.apiUrl + "auth/";
   currentUser: User;
   decodedToken: any;
@@ -22,11 +21,12 @@ export class AuthService {
   login(model: any) {
     return this.http.post(this.baseUrl + 'login', model).pipe(
       map((response: any) => {
+        console.log(response);
         const user = response;
         if (user) {
-          localStorage.setItem('token', user.token);
+          localStorage.setItem('token', user.tokenString);
           localStorage.setItem('user', JSON.stringify(user.user));
-          this.decodedToken = this.jwtHelper.decodeToken(user.token);
+          this.decodedToken = this.jwtHelper.decodeToken(user.tokenString);
           this.currentUser = user.user;
         }
       })
