@@ -39,7 +39,12 @@
 
   <!-- Confirm Password -->
   <div class="form-group">
-    <input type="password" class="form-control" placeholder="Confirm Password" formControlName="confirmPassword"  [ngClass]="{'is-invalid': registerForm.get('confirmPassword').errors 
+    <input 
+      type="password" 
+      class="form-control" 
+      placeholder="Confirm Password"
+      formControlName="confirmPassword"  
+      [ngClass]="{'is-invalid': registerForm.get('confirmPassword').errors 
     && registerForm.get('confirmPassword').touched || registerForm.get('confirmPassword').touched
     && registerForm.hasError('mismatch')}">
 
@@ -55,17 +60,18 @@
   </div>
 
   <!-- Date Of Birth -->
-    <div class="form-group" [ngClass]="{'has-error': registerForm.get('dateOfBirth').touched && registerForm.get('dateOfBirth').hasError('required')}">
-      <input 
-      type = "text"
-      class="form-control" 
-      placeholder="Date of birth" 
-      bsDatepicker
-      [bsConfig]="bsConfig" 
-      formControlName="dateOfBirth"/>
-      
-      <span class="help-block" *ngIf="registerForm.get('dateOfBirth').touched && registerForm.get('dateOfBirth').hasError('required')">Date of birth is required</span>
-    </div>
+  <div class="form-group">
+    <input 
+    type = "text"
+    class="form-control" 
+    placeholder="Date of birth" 
+    bsDatepicker
+    [bsConfig]="bsConfig" 
+    formControlName="dateOfBirth"
+    [ngClass]="{'is-invalid': registerForm.get('dateOfBirth').touched && registerForm.get('dateOfBirth').hasError('required')}"/>
+    
+    <span class="help-block" *ngIf="registerForm.get('dateOfBirth').touched && registerForm.get('dateOfBirth').hasError('required')">Date of birth is required</span>
+  </div>
 
   <div class="form-group text-center">
     <button class="btn btn-success mr-1" [disabled]="!registerForm.valid" type="submit">Register</button>
