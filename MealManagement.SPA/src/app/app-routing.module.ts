@@ -2,7 +2,8 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { HomeComponent } from "./_components/home/home.component";
 import { SignInOrSignUpComponent } from "./_components/SignInOnSignUp/SignInOrSignUp/SignInOrSignUp.component";
-import { MealListComponent } from './_components/mealList/mealList.component';
+import { MealListComponent } from "./_components/mealList/mealList.component";
+import { AuthGuard } from "./_guards/auth.guard";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -17,8 +18,15 @@ const routes: Routes = [
     data: { form: "signUp" }
   },
   {
-    path: "mealList",
-    component: MealListComponent,
+    path: "",
+    runGuardsAndResolvers: "always",
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: "mealList",
+        component: MealListComponent
+      }
+    ]
   }
 ];
 

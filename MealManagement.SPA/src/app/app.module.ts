@@ -20,6 +20,7 @@ import { AuthService } from './_services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MealListComponent } from './_components/mealList/mealList.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -54,7 +55,8 @@ export function tokenGetter() {
   providers: [
     CommonService, 
     AlertifyService,
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent],
   entryComponents:[
