@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { HomeComponent } from "./_components/home/home.component";
 import { SignInOrSignUpComponent } from "./_components/SignInOnSignUp/SignInOrSignUp/SignInOrSignUp.component";
+import { MealListComponent } from './_components/mealList/mealList.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -14,6 +15,10 @@ const routes: Routes = [
     path: "signUp",
     component: SignInOrSignUpComponent,
     data: { form: "signUp" }
+  },
+  {
+    path: "mealList",
+    component: MealListComponent,
   }
 ];
 
