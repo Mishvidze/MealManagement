@@ -51,7 +51,8 @@ namespace MealManagement.Controllers
             {
                 var userToReturn = Mapper.Map<UserForDetailedDto>(userToCreate);
 
-                return CreatedAtRoute("GetUser", new { controller = "Users", id = userToCreate.Id }, userToReturn);
+                //return CreatedAtRoute("GetUser", new { controller = "Users", id = userToCreate.Id }, userToReturn);
+                return Ok(userToReturn);
             }
 
 
